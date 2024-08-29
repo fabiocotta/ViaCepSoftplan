@@ -6,7 +6,8 @@ uses
   untPrincipal in 'untPrincipal.pas' {frmPrincipal},
   uMD5 in 'Utils\uMD5.pas',
   uDmGlobal in 'Datamodules\uDmGlobal.pas' {DmGlobal: TDataModule},
-  Controllers.Usuarios in 'Controllers\Controllers.Usuarios.pas';
+  Controllers.Usuarios in 'Controllers\Controllers.Usuarios.pas',
+  Controllers.Ceps in 'Controllers\Controllers.Ceps.pas';
 
 {$R *.res}
 

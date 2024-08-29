@@ -4,7 +4,7 @@ object DmGlobal: TDmGlobal
   object Conn: TFDConnection
     ConnectionName = 'Conn'
     Params.Strings = (
-      'Database=D:\dev\EasyPedido\FontesVCL\Servidor\DB\banco.db'
+      'Database=C:\dev\ViaCepSoftplan\Servidor\DB\banco'
       'LockingMode=Normal'
       'DriverID=SQLite')
     LoginPrompt = False

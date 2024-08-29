@@ -28,7 +28,7 @@ uses uDmGlobal,
      Horse,
      Horse.Jhonson,
      Horse.CORS,
-     Controllers.Usuarios;
+     Controllers.Usuarios, Controllers.Ceps;
 
 procedure TFrmPrincipal.FormShow(Sender: TObject);
 
@@ -36,8 +36,9 @@ begin
   THorse.Use(Jhonson());
   THorse.Use(CORS);
   Controllers.Usuarios.RegistrarRotas;
+  Controllers.Ceps.RegistrarRotas;
 
-  THorse.Listen(3000);
+  THorse.Listen(3001);
   lblStatus.Text := 'Servidor rodando na porta: ' + THorse.Port.ToString;
 
 end;

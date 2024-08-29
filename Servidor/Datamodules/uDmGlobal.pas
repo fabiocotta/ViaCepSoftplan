@@ -23,6 +23,9 @@ type
   public
     { Public declarations }
     function UsuarioLogin(email, senha: string): TJSONObject;
+    function CepsListar(filtro: string): TJSONArray;
+    function CepsListarId(id_cep: integer): TJSONObject;
+
   end;
 
 var
@@ -83,5 +86,61 @@ begin
     FreeAndNil(qry);
   end;
 end;
+
+function TDmGlobal.CepsListar(filtro: string): TJSONArray;
+var
+  qry: TFDQuery;
+begin
+  try
+
+    qry := TFDQuery.Create(nil);
+
+    qry.Connection := Conn;
+
+    qry.SQL.Add('select * from ceps');
+
+
+    if filtro <> '' then
+    begin
+      qry.SQL.Add('where logradouro like :filtro');
+      qry.ParamByName('filtro').Value := '%' + filtro + '%';
+    end;
+
+    qry.SQL.Add('order by id_ceps');
+    qry.Active := true;
+
+    Result := qry.ToJSONArray;
+
+
+  finally
+    FreeAndNil(qry);
+  end;
+end;
+
+function TDmGlobal.CepsListarId(id_cep: integer): TJSONObject;
+var
+  qry: TFDQuery;
+begin
+  try
+
+    qry := TFDQuery.Create(nil);
+
+    qry.Connection := Conn;
+
+    qry.SQL.Add('select * from ceps');
+    qry.SQL.Add('where id_cliente= :id_cep');
+    qry.ParamByName('id_cep').Value := id_cep;
+
+
+    qry.Active := true;
+
+    Result := qry.ToJSONObject;
+
+
+  finally
+    FreeAndNil(qry);
+  end;
+end;
+
 
 end.
