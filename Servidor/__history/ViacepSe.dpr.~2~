@@ -1,0 +1,15 @@
+program ViacepSe;
+
+uses
+  System.StartUpCopy,
+  FMX.Forms,
+  untPrincipal in 'untPrincipal.pas' {frmPrincipal},
+  uMD5 in 'Utils\uMD5.pas';
+
+{$R *.res}
+
+begin
+  Application.Initialize;
+  Application.CreateForm(TfrmPrincipal, frmPrincipal);
+  Application.Run;
+end.

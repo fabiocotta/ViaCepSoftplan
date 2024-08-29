@@ -1,0 +1,18 @@
+object DmGlobal: TDmGlobal
+  Height = 308
+  Width = 288
+  object Conn: TFDConnection
+    ConnectionName = 'Conn'
+    Params.Strings = (
+      'Database=D:\dev\EasyPedido\FontesVCL\Servidor\DB\banco.db'
+      'LockingMode=Normal'
+      'DriverID=SQLite')
+    LoginPrompt = False
+    Left = 56
+    Top = 24
+  end
+  object FDPhysSQLiteDriverLink: TFDPhysSQLiteDriverLink
+    Left = 56
+    Top = 112
+  end
+end
