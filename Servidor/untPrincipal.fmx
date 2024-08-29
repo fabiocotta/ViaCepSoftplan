@@ -7,5 +7,15 @@ object frmPrincipal: TfrmPrincipal
   FormFactor.Width = 320
   FormFactor.Height = 480
   FormFactor.Devices = [Desktop]
+  OnShow = FormShow
   DesignerMasterStyle = 0
+  object lblStatus: TLabel
+    Position.X = 8.000000000000000000
+    Position.Y = 356.000000000000000000
+    Size.Width = 201.000000000000000000
+    Size.Height = 17.000000000000000000
+    Size.PlatformDefault = False
+    Text = 'Servidor em execu'#231#227'o na porta:'
+    TabOrder = 1
+  end
 end
