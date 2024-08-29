@@ -5,8 +5,11 @@ interface
 uses Horse, System.SysUtils, System.JSON;
 
 procedure RegistrarRotas;
-procedure CepsListar(Req: THorseRequest; Res: THorseResponse; Next: TProc);
-procedure CepsListarId(Req: THorseRequest; Res: THorseResponse; Next: TProc);
+procedure Listar(Req: THorseRequest; Res: THorseResponse; Next: TProc);
+procedure ListarId(Req: THorseRequest; Res: THorseResponse; Next: TProc);
+procedure Inserir(Req: THorseRequest; Res: THorseResponse; Next: TProc);
+procedure Editar(Req: THorseRequest; Res: THorseResponse; Next: TProc);
+procedure Excluir(Req: THorseRequest; Res: THorseResponse; Next: TProc);
 
 
 
@@ -19,29 +22,32 @@ uses uDmGlobal;
 procedure RegistrarRotas;
 begin
   //Rotas
-  THorse.Get('/ceps', CepsListar);
-  THorse.Get('/ceps/:id_cep', CepsListarId);
+  THorse.Get('/ceps', Listar);
+  THorse.Get('/ceps/:id_ceps', ListarId);
+  THorse.Post('/ceps', Inserir);
+  THorse.Put('/ceps/:id_ceps', Editar);
+  THorse.Delete('/ceps/:id_ceps', Excluir);
 
 end;
 
 
-procedure CepsListarId(Req: THorseRequest; Res: THorseResponse; Next: TProc);
+procedure ListarId(Req: THorseRequest; Res: THorseResponse; Next: TProc);
 var
  DmGlobal: TDmGlobal;
- id_cep: Integer;
+ id_ceps: Integer;
 begin
   Try
     Try
       DmGlobal := TDmGlobal.Create(nil);
 
         try
-          id_cep := Req.Params['id_cep'].ToInteger;
+          id_ceps := Req.Params['id_ceps'].ToInteger;
         except
-          id_cep := 0;
+          id_ceps := 0;
 
         end;
 
-      Res.Send<TJsonObject>(DmGlobal.CepsListarId(id_cep));
+      Res.Send<TJsonObject>(DmGlobal.CepsListarId(id_ceps));
 
     Except on ex:exception do
       Res.Send('Ocorreu um erro: ' + ex.Message).Status(500);
@@ -52,7 +58,7 @@ begin
   End;
 end;
 
-procedure CepsListar(Req: THorseRequest; Res: THorseResponse; Next: TProc);
+procedure Listar(Req: THorseRequest; Res: THorseResponse; Next: TProc);
 var
  DmGlobal: TDmGlobal;
  filtro: String;
@@ -68,5 +74,116 @@ begin
     FreeAndNil(DmGlobal);
   end;
 end;
+
+procedure Inserir(Req: THorseRequest; Res: THorseResponse; Next: TProc);
+var
+ DmGlobal: TDmGlobal;
+ body: TJsonObject;
+ cep: integer;
+ logradouro, complemento, bairro, localidade, uf: string;
+begin
+  Try
+    Try
+      DmGlobal := TDmGlobal.Create(nil);
+      body := Req.Body<TJsonObject>;
+
+      cep := body.GetValue<integer>('cep', 0);
+      logradouro := body.GetValue<string>('logradouro', '');
+      complemento := body.GetValue<string>('complemento', '');
+      bairro := body.GetValue<string>('bairro', '');
+      localidade := body.GetValue<string>('localidade', '');
+      uf := body.GetValue<string>('uf', '');
+
+
+      Res.Send<TJsonObject>(DmGlobal.CepsInserir(cep, logradouro, complemento,
+                            bairro, localidade, uf)).Status(201);
+
+    Except on ex:exception do
+      Res.Send('Ocorreu um erro: ' + ex.Message).Status(500);
+
+    End;
+  Finally
+  FreeAndNil(DmGlobal);
+  End;
+
+end;
+
+procedure Editar(Req: THorseRequest; Res: THorseResponse; Next: TProc);
+var
+ DmGlobal: TDmGlobal;
+ body: TJsonObject;
+ id_ceps, cep: integer;
+ logradouro, complemento, bairro, localidade, uf: string;
+
+begin
+  Try
+    Try
+      DmGlobal := TDmglobal.Create(nil);
+
+         try
+          id_ceps := Req.Params['id_ceps'].ToInteger;
+        except
+          id_ceps := 0;
+
+        end;
+
+      body := Req.Body<TJsonObject>;
+      cep := body.GetValue<integer>('cep', 0);
+      logradouro := body.GetValue<string>('logradouro', '');
+      complemento := body.GetValue<string>('complemento', '');
+      bairro := body.GetValue<string>('bairro', '');
+      localidade := body.GetValue<string>('localidade', '');
+      uf := body.GetValue<string>('uf', '');
+
+      Res.Send<TJsonObject>(DmGlobal.CepsEditar(id_ceps, cep, logradouro,
+                                                complemento, bairro,
+                                                localidade, uf));
+
+    Except on ex:exception do
+      Res.Send('Ocorreu um erro: ' + ex.Message).Status(500);
+
+    End;
+  Finally
+  FreeAndNil(DmGlobal);
+  End;
+
+
+end;
+
+procedure Excluir(Req: THorseRequest; Res: THorseResponse; Next: TProc);
+var
+ DmGlobal: TDmGlobal;
+ body: TJsonObject;
+ id_ceps: integer;
+
+begin
+  Try
+    Try
+      DmGlobal := TDmGlobal.Create(nil);
+
+         try
+          id_ceps := Req.Params['id_ceps'].ToInteger;
+        except
+          id_ceps := 0;
+
+        end;
+
+      body := Req.Body<TJsonObject>;
+
+
+
+      Res.Send<TJsonObject>(DmGlobal.CepsExcluir(id_ceps));
+
+    Except on ex:exception do
+      Res.Send('Ocorreu um erro: ' + ex.Message).Status(500);
+
+    End;
+  Finally
+  FreeAndNil(DmGlobal);
+  End;
+end;
+
+
+
 
 end.

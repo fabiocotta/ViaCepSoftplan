@@ -19,12 +19,20 @@ type
   private
     procedure CarregarConfigDB(Connection: TFDConnection);
 
+
+
     { Private declarations }
   public
     { Public declarations }
     function UsuarioLogin(email, senha: string): TJSONObject;
     function CepsListar(filtro: string): TJSONArray;
-    function CepsListarId(id_cep: integer): TJSONObject;
+    function CepsListarId(cep: integer): TJSONObject;
+    function CepsInserir(cep: integer;  logradouro, complemento, bairro,
+                         localidade, uf: string): TJsonObject;
+    function CepsEditar(id_ceps, cep: integer; logradouro, complemento, bairro,
+      localidade, uf: string): TJsonObject;
+    function CepsExcluir(id_ceps: integer): TJsonObject;
+
 
   end;
 
@@ -117,7 +125,7 @@ begin
   end;
 end;
 
-function TDmGlobal.CepsListarId(id_cep: integer): TJSONObject;
+function TDmGlobal.CepsListarId(cep: integer): TJSONObject;
 var
   qry: TFDQuery;
 begin
@@ -128,8 +136,8 @@ begin
     qry.Connection := Conn;
 
     qry.SQL.Add('select * from ceps');
-    qry.SQL.Add('where id_cliente= :id_cep');
-    qry.ParamByName('id_cep').Value := id_cep;
+    qry.SQL.Add('where cep = :cep');
+    qry.ParamByName('cep').Value := cep;
 
 
     qry.Active := true;
@@ -141,6 +149,107 @@ begin
     FreeAndNil(qry);
   end;
 end;
+
+function TDmGlobal.CepsInserir(cep: integer; logradouro, complemento,
+                            bairro, localidade, uf: string): TJsonObject;
+var
+  qry: TFDQuery;
+begin
+  try
+
+    qry := TFDQuery.Create(nil);
+
+    qry.Connection := Conn;
+
+    qry.SQL.Add('insert into ceps(cep, logradouro, complemento,');
+    qry.SQL.Add('bairro, localidade, uf)');
+    qry.SQL.Add('values(:cep, :logradouro, :complemento,');
+    qry.SQL.Add(':bairro, :localidade, :uf);');
+    qry.SQL.Add('select last_insert_rowid() as id_cep');
+
+    qry.ParamByName('cep').Value := cep;
+    qry.ParamByName('logradouro').Value := logradouro;
+    qry.ParamByName('complemento').Value := complemento;
+    qry.ParamByName('bairro').Value := bairro;
+    qry.ParamByName('localidade').Value := localidade;
+    qry.ParamByName('uf').Value := uf;
+
+
+    qry.Active := true;
+
+    Result := qry.ToJSONObject;
+
+
+  finally
+    FreeAndNil(qry);
+  end;
+end;
+
+function TDmGlobal.CepsEditar(id_ceps, cep: integer;
+                              logradouro, complemento, bairro, localidade,
+                              uf: string): TJsonObject;
+var
+  qry: TFDQuery;
+begin
+  try
+
+    qry := TFDQuery.Create(nil);
+
+    qry.Connection := Conn;
+
+    qry.SQL.Add('update ceps set cep=:cep,');
+    qry.SQL.Add('logradouro=:logradouro, complemento=:complemento, bairro=:bairro,');
+    qry.SQL.Add('localidade=:localidade, uf=:uf');
+    qry.SQL.Add('where id_ceps = :id_ceps');
+
+
+    qry.ParamByName('id_ceps').Value := id_ceps;
+    qry.ParamByName('cep').Value := cep;
+    qry.ParamByName('logradouro').Value := logradouro;
+    qry.ParamByName('complemento').Value := complemento;
+    qry.ParamByName('bairro').Value := bairro;
+    qry.ParamByName('localidade').Value := localidade;
+    qry.ParamByName('uf').Value := uf;
+
+
+    qry.ExecSQL;
+
+    Result := qry.ToJSONObject.Create(TJsonPair.Create('id_ceps', id_ceps));
+
+
+  finally
+    FreeAndNil(qry);
+  end;
+end;
+
+function TDmGlobal.CepsExcluir(id_ceps: integer): TJsonObject;
+var
+  qry: TFDQuery;
+begin
+  try
+
+    qry := TFDQuery.Create(nil);
+
+    qry.Connection := Conn;
+
+
+    qry.SQL.Add('delete from ceps');
+    qry.SQL.Add('where id_ceps = :id_ceps');
+    qry.ParamByName('id_ceps').Value := id_ceps;
+    qry.ExecSQL;
+
+
+    qry.ExecSQL;
+
+    Result := qry.ToJSONObject.Create(TJsonPair.Create('id_ceps', id_ceps));
+
+
+  finally
+    FreeAndNil(qry);
+  end;
+end;
+
+
 
 
 end.
