@@ -280,7 +280,7 @@ object frmPrincipal: TfrmPrincipal
     Height = 653
     Cursor = crHandPoint
     CloseStyle = svcCompact
-    Color = 5585461
+    Color = 16475988
     CompactWidth = 55
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWhite
@@ -498,13 +498,11 @@ object frmPrincipal: TfrmPrincipal
       Font.Height = -17
       Font.Name = 'Segoe UI'
       Font.Style = []
-      HotButtonColor = 6969943
+      HotButtonColor = 16475988
       Images = ImageList
       RegularButtonColor = clNone
-      SelectedButtonColor = 6969943
+      SelectedButtonColor = 16475988
       TabOrder = 1
-      ExplicitTop = 55
-      ExplicitHeight = 598
     end
   end
   object sSubMenu: TSplitView

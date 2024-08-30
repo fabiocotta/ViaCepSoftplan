@@ -10,7 +10,8 @@ uses
   Vcl.Session in 'Utils\Vcl.Session.pas',
   untEnderecos in 'untEnderecos.pas' {frmEnderecos},
   untEnderecosCad in 'untEnderecosCad.pas' {FrmCadEndereco},
-  DataModule.Enderecos in 'DataModules\DataModule.Enderecos.pas' {DmEnderecos: TDataModule};
+  DataModule.Enderecos in 'DataModules\DataModule.Enderecos.pas' {DmEnderecos: TDataModule},
+  uFormat in 'uFormat.pas';
 
 {$R *.res}
 

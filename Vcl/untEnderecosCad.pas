@@ -48,10 +48,11 @@ type
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure btnCancelarClick(Sender: TObject);
     procedure FormShow(Sender: TObject);
-      procedure btnSalvarClick(Sender: TObject);
+    procedure btnSalvarClick(Sender: TObject);
     procedure btnPesquisarClick(Sender: TObject);
-  private
     procedure ConsultarCEP(cep: string);
+  private
+
 
     { Private declarations }
   public
@@ -87,7 +88,7 @@ begin
         DmEnderecos.Inserir(edtCep.Text, edtLogradouro.Text, edtComplemento.Text,
                           edtBairro.Text, edtLocalidade.Text, edtUf.Text)
     else
-        DmEnderecos.Editar(TNavigation.ParamStr, edtCep.Text, edtLogradouro.Text, edtComplemento.Text,
+        DmEnderecos.Editar(TNavigation.ParamInt, TNavigation.ParamInt, edtLogradouro.Text, edtComplemento.Text,
                           edtBairro.Text, edtLocalidade.Text, edtUf.Text);
 
   end, TerminateSalvar);
@@ -180,7 +181,7 @@ begin
         begin
             with MemTable do
             begin
-                //edtCep.Text :=FieldByName('cep').AsString;
+
                 edtLogradouro.Text := FieldByName('logradouro').AsString;
                 edtComplemento.Text := FieldByName('complemento').AsString;
                 edtBairro.Text := FieldByName('bairro').AsString;

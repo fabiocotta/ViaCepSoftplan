@@ -3,8 +3,7 @@ unit DataModule.Enderecos;
 interface
 
 uses
-
-    System.SysUtils, System.Classes, DataSet.Serialize.Config,
+  System.SysUtils, System.Classes, DataSet.Serialize.Config,
   RESTRequest4D, DataSet.Serialize.Adapter.RESTRequest4D,
   System.JSON, FireDAC.Comp.Client;
 
@@ -17,13 +16,13 @@ type
     { Private declarations }
   public
     { Public declarations }
-    procedure Editar(id_ceps, cep, logradouro, complemento, bairro,
-      localidade, uf: string);
-    procedure Excluir(id_ceps: integer);
-    procedure Inserir(cep, logradouro, complemento, bairro, localidade,
-      uf: string);
-    procedure ListarEnderecos(MemTable: TFDMemTable; filtro: string);
-    procedure ListarEnderecosId(MemTable: TFDMemTable; id_ceps: integer);
+  procedure Editar(id_ceps, cep: integer; logradouro, complemento, bairro,
+                   localidade, uf: string);
+  procedure Excluir(id_ceps: integer);
+  procedure Inserir(cep, logradouro, complemento, bairro, localidade,
+                    uf: string);
+  procedure ListarEnderecos(MemTable: TFDMemTable; filtro: string);
+  procedure ListarEnderecosId(MemTable: TFDMemTable; id_ceps: integer);
 
   end;
 
@@ -105,7 +104,7 @@ end;
 
 
 
-procedure TDmEnderecos.Editar(id_ceps, cep, logradouro, complemento, bairro,
+procedure TDmEnderecos.Editar(id_ceps, cep:integer; logradouro, complemento, bairro,
                               localidade, uf:string);
 var
     resp: IResponse;
@@ -122,7 +121,7 @@ begin
 
     resp := TRequest.New.BaseURL('http://localhost:3001')
                     .Resource('/ceps')
-                    .ResourceSuffix(id_ceps)
+                    .ResourceSuffix(id_ceps.ToString)
                     .AddBody(json.ToJSON)
                     .Accept('application/json')
                     .Put;

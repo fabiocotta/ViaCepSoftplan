@@ -26,7 +26,7 @@ type
     { Public declarations }
     function UsuarioLogin(email, senha: string): TJSONObject;
     function CepsListar(filtro: string): TJSONArray;
-    function CepsListarId(cep: integer): TJSONObject;
+    function CepsListarId(id_ceps: integer): TJSONObject;
     function CepsInserir(cep: integer;  logradouro, complemento, bairro,
                          localidade, uf: string): TJsonObject;
     function CepsEditar(id_ceps, cep: integer; logradouro, complemento, bairro,
@@ -125,7 +125,7 @@ begin
   end;
 end;
 
-function TDmGlobal.CepsListarId(cep: integer): TJSONObject;
+function TDmGlobal.CepsListarId(id_ceps: integer): TJSONObject;
 var
   qry: TFDQuery;
 begin
@@ -136,8 +136,8 @@ begin
     qry.Connection := Conn;
 
     qry.SQL.Add('select * from ceps');
-    qry.SQL.Add('where cep = :cep');
-    qry.ParamByName('cep').Value := cep;
+    qry.SQL.Add('where id_ceps = :id_ceps');
+    qry.ParamByName('id_ceps').Value := id_ceps;
 
 
     qry.Active := true;

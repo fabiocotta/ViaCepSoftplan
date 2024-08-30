@@ -3,8 +3,8 @@ object FrmCadEndereco: TFrmCadEndereco
   Top = 0
   BorderStyle = bsNone
   Caption = 'Cadastro de Endere'#231'o'
-  ClientHeight = 520
-  ClientWidth = 704
+  ClientHeight = 436
+  ClientWidth = 519
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText

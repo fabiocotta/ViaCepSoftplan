@@ -1,0 +1,154 @@
+unit DataModule.Enderecos;
+
+interface
+
+uses
+
+    System.SysUtils, System.Classes, DataSet.Serialize.Config,
+  RESTRequest4D, DataSet.Serialize.Adapter.RESTRequest4D,
+  System.JSON, FireDAC.Comp.Client;
+
+
+type
+  TDmEnderecos = class(TDataModule)
+  procedure DataModuleCreate(Sender: TObject);
+  private
+
+    { Private declarations }
+  public
+    { Public declarations }
+    procedure Editar(id_ceps, cep, logradouro, complemento, bairro,
+      localidade, uf: string);
+    procedure Excluir(id_ceps: integer);
+    procedure Inserir(cep, logradouro, complemento, bairro, localidade,
+      uf: string);
+    procedure ListarEnderecos(MemTable: TFDMemTable; filtro: string);
+    procedure ListarEnderecosId(MemTable: TFDMemTable; id_ceps: integer);
+
+  end;
+
+var
+  DmEnderecos: TDmEnderecos;
+
+implementation
+
+{%CLASSGROUP 'Vcl.Controls.TControl'}
+
+{$R *.dfm}
+
+procedure TDmEnderecos.DataModuleCreate(Sender: TObject);
+begin
+    TDataSetSerializeConfig.GetInstance.CaseNameDefinition := cndLower;
+    TDataSetSerializeConfig.GetInstance.Import.DecimalSeparator := '.';
+end;
+
+
+procedure TDmEnderecos.ListarEnderecos(MemTable: TFDMemTable; filtro: string);
+var
+    resp: IResponse;
+begin
+    resp := TRequest.New.BaseURL('http://localhost:3001')
+                    .Resource('/ceps')
+                    .AddParam('filtro', filtro)
+                    .Accept('application/json')
+                    .Adapters(TDataSetSerializeAdapter.New(MemTable))
+                    .Get;
+
+    if resp.StatusCode <> 200 then
+        raise Exception.Create(resp.Content);
+end;
+
+procedure TDmEnderecos.ListarEnderecosId(MemTable: TFDMemTable; id_ceps: integer);
+var
+    resp: IResponse;
+begin
+    resp := TRequest.New.BaseURL('http://localhost:3001')
+                    .Resource('/ceps')
+                    .ResourceSuffix(id_ceps.ToString)
+                    .Accept('application/json')
+                    .Adapters(TDataSetSerializeAdapter.New(MemTable))
+                    .Get;
+
+    if resp.StatusCode <> 200 then
+        raise Exception.Create(resp.Content);
+end;
+
+procedure TDmEnderecos.Inserir(cep, logradouro, complemento, bairro,
+                             localidade, uf:string);
+var
+    resp: IResponse;
+    json: TJsonObject;
+begin
+  try
+    json:= TJsonObject.Create;
+    json.AddPair('cep', cep);
+    json.AddPair('logradouro', logradouro);
+    json.AddPair('complemento', complemento);
+    json.AddPair('bairro', bairro);
+    json.AddPair('localidade', localidade);
+    json.AddPair('uf', uf);
+
+    resp := TRequest.New.BaseURL('http://localhost:3001')
+                    .Resource('/ceps')
+                    .AddBody(json.ToJSON)
+                    .Accept('application/json')
+                    .Post;
+
+    if resp.StatusCode <> 201 then
+        raise Exception.Create(resp.Content);
+
+  finally
+    FreeAndNil(json);
+  end;
+
+end;
+
+
+
+procedure TDmEnderecos.Editar(id_ceps, cep, logradouro, complemento, bairro,
+                              localidade, uf:string);
+var
+    resp: IResponse;
+    json: TJsonObject;
+begin
+  try
+    json:= TJsonObject.Create;
+    json.AddPair('cep', cep);
+    json.AddPair('logradouro', logradouro);
+    json.AddPair('complemento', complemento);
+    json.AddPair('bairro', bairro);
+    json.AddPair('localidade', localidade);
+    json.AddPair('uf', uf);
+
+    resp := TRequest.New.BaseURL('http://localhost:3001')
+                    .Resource('/ceps')
+                    .ResourceSuffix(id_ceps)
+                    .AddBody(json.ToJSON)
+                    .Accept('application/json')
+                    .Put;
+
+    if resp.StatusCode <> 200 then
+        raise Exception.Create(resp.Content);
+
+  finally
+    FreeAndNil(json);
+  end;
+
+end;
+
+
+procedure TDmEnderecos.Excluir(id_ceps: integer);
+var
+    resp: IResponse;
+begin
+    resp := TRequest.New.BaseURL('http://localhost:3001')
+                    .Resource('/ceps')
+                    .ResourceSuffix(id_ceps.ToString)
+                    .Accept('application/json')
+                    .Delete;
+
+    if resp.StatusCode <> 200 then
+        raise Exception.Create(resp.Content);
+end;
+
+end.
