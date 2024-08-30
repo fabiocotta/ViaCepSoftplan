@@ -3,8 +3,8 @@ object FrmCadEndereco: TFrmCadEndereco
   Top = 0
   BorderStyle = bsNone
   Caption = 'Cadastro de Endere'#231'o'
-  ClientHeight = 482
-  ClientWidth = 559
+  ClientHeight = 520
+  ClientWidth = 704
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -18,7 +18,7 @@ object FrmCadEndereco: TFrmCadEndereco
   object lblTitulo: TLabel
     AlignWithMargins = True
     Left = 25
-    Top = 20
+    Top = 8
     Width = 249
     Height = 42
     Margins.Left = 0
@@ -282,6 +282,40 @@ object FrmCadEndereco: TFrmCadEndereco
     ParentFont = False
     TabOrder = 7
   end
+  object Panel3: TPanel
+    AlignWithMargins = True
+    Left = 172
+    Top = 78
+    Width = 110
+    Height = 40
+    Margins.Left = 0
+    Margins.Top = 20
+    Margins.Right = 15
+    Margins.Bottom = 20
+    BevelOuter = bvNone
+    Color = 14869218
+    ParentBackground = False
+    TabOrder = 8
+    object btnPesquisar: TSpeedButton
+      Left = 0
+      Top = 0
+      Width = 110
+      Height = 40
+      Cursor = crHandPoint
+      Align = alClient
+      Caption = 'Pesquisar'
+      Flat = True
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = 5585461
+      Font.Height = -19
+      Font.Name = 'Segoe UI'
+      Font.Style = []
+      ParentFont = False
+      OnClick = btnPesquisarClick
+      ExplicitLeft = 16
+      ExplicitTop = 15
+    end
+  end
   object tbEnderecoCad: TFDMemTable
     Active = True
     FieldDefs = <
@@ -328,8 +362,8 @@ object FrmCadEndereco: TFrmCadEndereco
     UpdateOptions.CheckRequired = False
     UpdateOptions.AutoCommitUpdates = True
     StoreDefs = True
-    Left = 437
-    Top = 40
+    Left = 549
+    Top = 32
     Content = {
       414442531000000038030000FF00010001FF02FF0304001A0000007400620045
       006E00640065007200650063006F0043006100640005001A0000007400620045
@@ -398,5 +432,46 @@ object FrmCadEndereco: TFrmCadEndereco
     object tbEnderecoCaduf: TStringField
       FieldName = 'uf'
     end
+  end
+  object RESTClient1: TRESTClient
+    BaseURL = 'http://viacep.com.br/ws'
+    Params = <>
+    SynchronizedEvents = False
+    Left = 544
+    Top = 104
+  end
+  object RESTRequest1: TRESTRequest
+    AssignedValues = [rvConnectTimeout, rvReadTimeout]
+    Client = RESTClient1
+    Params = <>
+    Resource = '01001000/json/'
+    Response = RESTResponse1
+    SynchronizedEvents = False
+    Left = 544
+    Top = 240
+  end
+  object RESTResponse1: TRESTResponse
+    Left = 544
+    Top = 168
+  end
+  object RESTResponseDataSetAdapter1: TRESTResponseDataSetAdapter
+    Dataset = MemTable
+    FieldDefs = <>
+    Response = RESTResponse1
+    TypesMode = Rich
+    Left = 544
+    Top = 304
+  end
+  object MemTable: TFDMemTable
+    FetchOptions.AssignedValues = [evMode]
+    FetchOptions.Mode = fmAll
+    ResourceOptions.AssignedValues = [rvSilentMode]
+    ResourceOptions.SilentMode = True
+    UpdateOptions.AssignedValues = [uvUpdateChngFields, uvUpdateMode, uvLockMode, uvLockPoint, uvLockWait, uvRefreshMode, uvFetchGeneratorsPoint, uvCheckRequired, uvCheckReadOnly, uvCheckUpdatable]
+    UpdateOptions.LockWait = True
+    UpdateOptions.FetchGeneratorsPoint = gpNone
+    UpdateOptions.CheckRequired = False
+    Left = 544
+    Top = 368
   end
 end

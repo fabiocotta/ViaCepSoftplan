@@ -8,7 +8,8 @@ uses
   FireDAC.Stan.Param, FireDAC.Stan.Error, FireDAC.DatS, FireDAC.Phys.Intf,
   FireDAC.DApt.Intf, FireDAC.Stan.StorageBin, Data.DB, FireDAC.Comp.DataSet,
   FireDAC.Comp.Client, Vcl.StdCtrls, Vcl.Buttons, Vcl.ExtCtrls, Vcl.Navigation,
-  Vcl.Loading;
+  Vcl.Loading, REST.Types, REST.Response.Adapter, REST.Client,
+  Data.Bind.Components, Data.Bind.ObjectScope;
 
 type
   TFrmCadEndereco = class(TForm)
@@ -37,11 +38,20 @@ type
     tbEnderecoCadbairro: TStringField;
     tbEnderecoCadlocalidade: TStringField;
     tbEnderecoCaduf: TStringField;
+    RESTClient1: TRESTClient;
+    RESTRequest1: TRESTRequest;
+    RESTResponse1: TRESTResponse;
+    RESTResponseDataSetAdapter1: TRESTResponseDataSetAdapter;
+    MemTable: TFDMemTable;
+    Panel3: TPanel;
+    btnPesquisar: TSpeedButton;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure btnCancelarClick(Sender: TObject);
     procedure FormShow(Sender: TObject);
       procedure btnSalvarClick(Sender: TObject);
+    procedure btnPesquisarClick(Sender: TObject);
   private
+    procedure ConsultarCEP(cep: string);
 
     { Private declarations }
   public
@@ -58,7 +68,12 @@ implementation
 
 {$R *.dfm}
 
-uses DataModule.Enderecos, untLogin;
+uses DataModule.Enderecos, untLogin, uFormat;
+
+procedure TFrmCadEndereco.btnPesquisarClick(Sender: TObject);
+begin
+  ConsultarCEP(edtCEP.Text);
+end;
 
 procedure TFrmCadEndereco.btnSalvarClick(Sender: TObject);
 begin
@@ -145,6 +160,40 @@ begin
     end, TerminateLoad);
 
 end;
+
+procedure TFrmCadEndereco.ConsultarCEP(cep: string);
+begin
+    if SomenteNumero(edtCEP.Text).Length <> 8 then
+    begin
+        ShowMessage('CEP inválido');
+        exit;
+    end;
+
+    RESTRequest1.Resource := SomenteNumero(edtCEP.Text) + '/json';
+    RESTRequest1.Execute;
+
+    if RESTRequest1.Response.StatusCode = 200 then
+    begin
+        if RESTRequest1.Response.Content.IndexOf('erro') > 0 then
+            ShowMessage('CEP não encontrado')
+        else
+        begin
+            with MemTable do
+            begin
+                //edtCep.Text :=FieldByName('cep').AsString;
+                edtLogradouro.Text := FieldByName('logradouro').AsString;
+                edtComplemento.Text := FieldByName('complemento').AsString;
+                edtBairro.Text := FieldByName('bairro').AsString;
+                edtLocalidade.Text := FieldByName('localidade').AsString;
+                edtUf.Text := FieldByName('uf').AsString;
+
+            end;
+        end;
+    end
+    else
+        ShowMessage('Erro ao consultar CEP');
+end;
+
 
 
 end.

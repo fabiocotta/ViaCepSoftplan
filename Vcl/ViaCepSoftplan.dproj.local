@@ -11,8 +11,8 @@
     <Transaction>2024/08/30 08:55:32.000.749,=C:\dev\ViaCepSoftplan\Vcl\Unit1.pas</Transaction>
     <Transaction>2024/08/30 08:58:21.000.841,C:\dev\ViaCepSoftplan\Vcl\untPrincipal.pas=C:\dev\ViaCepSoftplan\Vcl\Unit1.pas</Transaction>
     <Transaction>2024/08/30 08:58:21.000.841,C:\dev\ViaCepSoftplan\Vcl\untPrincipal.dfm=C:\dev\ViaCepSoftplan\Vcl\Unit1.dfm</Transaction>
-    <Transaction>2024/08/30 09:02:21.000.522,=C:\dev\ViaCepSoftplan\Vcl\Utils\Vcl.Navigation.pas</Transaction>
     <Transaction>2024/08/30 09:02:21.000.538,=C:\dev\ViaCepSoftplan\Vcl\Utils\Vcl.Session.pas</Transaction>
+    <Transaction>2024/08/30 09:02:21.000.522,=C:\dev\ViaCepSoftplan\Vcl\Utils\Vcl.Navigation.pas</Transaction>
     <Transaction>2024/08/30 09:02:21.000.522,=C:\dev\ViaCepSoftplan\Vcl\Utils\Vcl.Loading.pas</Transaction>
     <Transaction>2024/08/30 09:16:46.000.716,=C:\dev\ViaCepSoftplan\Vcl\Unit1.pas</Transaction>
     <Transaction>2024/08/30 09:20:01.000.070,C:\dev\ViaCepSoftplan\Vcl\untEnderecos.pas=C:\dev\ViaCepSoftplan\Vcl\Unit1.pas</Transaction>
@@ -23,7 +23,8 @@
     <Transaction>2024/08/30 10:13:24.000.521,=C:\dev\ViaCepSoftplan\Vcl\Unit1.pas</Transaction>
     <Transaction>2024/08/30 10:13:45.000.285,C:\dev\ViaCepSoftplan\Vcl\DataModules\DataModule.Enderecos.pas=C:\dev\ViaCepSoftplan\Vcl\Unit1.pas</Transaction>
     <Transaction>2024/08/30 10:13:45.000.285,C:\dev\ViaCepSoftplan\Vcl\DataModules\DataModule.Enderecos.dfm=C:\dev\ViaCepSoftplan\Vcl\Unit1.dfm</Transaction>
-  </Transactions>  <ProjectSortOrder AutoSort="0" SortType="0">
+  </Transactions>
+	<ProjectSortOrder AutoSort="0" SortType="0">
     <File Path="DataModules"/>
     <File Path="DataModules\DataModule.Enderecos.pas"/>
     <File Path="DataModules\DataModule.Enderecos.dfm"/>
