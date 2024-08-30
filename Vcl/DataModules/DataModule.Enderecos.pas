@@ -16,7 +16,7 @@ type
     { Private declarations }
   public
     { Public declarations }
-  procedure Editar(id_ceps, cep: integer; logradouro, complemento, bairro,
+  procedure Editar(id_ceps:integer; cep,logradouro, complemento, bairro,
                    localidade, uf: string);
   procedure Excluir(id_ceps: integer);
   procedure Inserir(cep, logradouro, complemento, bairro, localidade,
@@ -104,7 +104,7 @@ end;
 
 
 
-procedure TDmEnderecos.Editar(id_ceps, cep:integer; logradouro, complemento, bairro,
+procedure TDmEnderecos.Editar(id_ceps:integer; cep, logradouro, complemento, bairro,
                               localidade, uf:string);
 var
     resp: IResponse;

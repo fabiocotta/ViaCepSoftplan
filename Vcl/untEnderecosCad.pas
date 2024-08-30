@@ -88,8 +88,9 @@ begin
         DmEnderecos.Inserir(edtCep.Text, edtLogradouro.Text, edtComplemento.Text,
                           edtBairro.Text, edtLocalidade.Text, edtUf.Text)
     else
-        DmEnderecos.Editar(TNavigation.ParamInt, TNavigation.ParamInt, edtLogradouro.Text, edtComplemento.Text,
-                          edtBairro.Text, edtLocalidade.Text, edtUf.Text);
+        DmEnderecos.Editar(TNavigation.ParamInt, edtCep.Text, edtLogradouro.text,
+                           edtComplemento.Text, edtBairro.Text,
+                           edtLocalidade.Text, edtUf.Text);
 
   end, TerminateSalvar);
 end;
