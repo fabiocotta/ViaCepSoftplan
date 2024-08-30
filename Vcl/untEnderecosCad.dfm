@@ -226,6 +226,7 @@ object FrmCadEndereco: TFrmCadEndereco
     ParentFont = False
     TabOrder = 3
     OnExit = edtCepExit
+    OnKeyPress = edtCepKeyPress
   end
   object edtComplemento: TEdit
     Left = 25
