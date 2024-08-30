@@ -80,9 +80,9 @@ begin
     qry.Connection := Conn;
 
     qry.SQL.Add('select id_usuario, nome, email from usuario');
-    qry.SQL.Add('where email = :email and senha = :senha');
+    qry.SQL.Add('where email=:email and senha=:senha');
     qry.ParamByName('email').Value := email;
-    qry.ParamByName('senha').Value := SaltPassword(senha);
+    qry.ParamByName('senha').Value := senha;
 
 
     qry.Active := true;

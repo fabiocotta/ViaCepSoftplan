@@ -17,7 +17,7 @@ uses uDmGlobal;
 procedure RegistrarRotas;
 begin
   //Rotas
-  THorse.Post('/usuarios', Login);
+  THorse.get('/usuarios', Login);
 
 end;
 
@@ -25,7 +25,7 @@ end;
 procedure Login(Req: THorseRequest; Res: THorseResponse; Next: TProc);
 var
  DmGlobal: TDmGlobal;
- body, valida: TJsonObject;
+ body: TJsonObject;
  email, senha: string;
 begin
   Try
@@ -33,18 +33,10 @@ begin
       DmGlobal := TDmGlobal.Create(nil);
       body := Req.Body<TJsonObject>;
 
-      email := body.GetValue<string>('email', '');
-      senha := body.GetValue<string>('senha', '');
+      email := body.GetValue<string>('email', email);
+      senha := body.GetValue<string>('senha', senha);
 
-      valida := DmGlobal.UsuarioLogin(email, senha);
-
-      if valida.Size = 0 then
-        begin
-          Res.Send('Email ou senha inválida').Status(401);
-          FreeAndNil(valida);
-        end
-        else
-          Res.Send<TJsonObject>(valida);
+      Res.Send<TJsonObject>(DmGlobal.UsuarioLogin(email, senha)).Status(200);
 
     Except on ex:exception do
       Res.Send('Ocorreu um erro: ' + ex.Message).Status(500);
@@ -55,6 +47,8 @@ begin
   End;
 
   end;
+
+
 
 
 end.

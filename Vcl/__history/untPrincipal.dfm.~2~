@@ -1,0 +1,16 @@
+object frmPrincipal: TfrmPrincipal
+  Left = 0
+  Top = 0
+  BorderStyle = bsSingle
+  Caption = 'ViaCepSoftplan'
+  ClientHeight = 653
+  ClientWidth = 1035
+  Color = clBtnFace
+  Font.Charset = DEFAULT_CHARSET
+  Font.Color = clWindowText
+  Font.Height = -12
+  Font.Name = 'Segoe UI'
+  Font.Style = []
+  WindowState = wsMaximized
+  TextHeight = 15
+end

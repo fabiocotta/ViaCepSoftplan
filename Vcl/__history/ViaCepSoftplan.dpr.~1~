@@ -1,0 +1,14 @@
+program ViaCepSoftplan;
+
+uses
+  Vcl.Forms,
+  untLogin in 'untLogin.pas' {frmLogin};
+
+{$R *.res}
+
+begin
+  Application.Initialize;
+  Application.MainFormOnTaskbar := True;
+  Application.CreateForm(TfrmLogin, frmLogin);
+  Application.Run;
+end.

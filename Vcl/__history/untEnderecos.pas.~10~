@@ -1,0 +1,153 @@
+unit untEnderecos;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Data.DB, FireDAC.Stan.Intf,
+  FireDAC.Stan.Option, FireDAC.Stan.Param, FireDAC.Stan.Error, FireDAC.DatS,
+  FireDAC.Phys.Intf, FireDAC.DApt.Intf, FireDAC.Stan.StorageBin, Vcl.StdCtrls,
+  Vcl.Buttons, Vcl.ExtCtrls, FireDAC.Comp.DataSet, FireDAC.Comp.Client,
+  Vcl.Grids, Vcl.DBGrids,Vcl.Navigation,
+  Vcl.Loading;
+
+type
+  TfrmEnderecos = class(TForm)
+    gridEnderecos: TDBGrid;
+    tbEnderecos: TFDMemTable;
+    pHeader: TPanel;
+    Label4: TLabel;
+    Panel1: TPanel;
+    btnAcessar: TSpeedButton;
+    Panel2: TPanel;
+    SpeedButton1: TSpeedButton;
+    Panel3: TPanel;
+    SpeedButton2: TSpeedButton;
+    pBusca: TPanel;
+    Panel7: TPanel;
+    btnBusca: TSpeedButton;
+    edtBusca: TEdit;
+    dsEnderecos: TDataSource;
+    tbEnderecosid_ceps: TIntegerField;
+    tbEnderecoscep: TIntegerField;
+    tbEnderecoslogradouro: TStringField;
+    tbEnderecoscomplemento: TStringField;
+    tbEnderecosbairro: TStringField;
+    tbEnderecoslocalidade: TStringField;
+    tbEnderecosuf: TStringField;
+    procedure FormClose(Sender: TObject; var Action: TCloseAction);
+    procedure FormShow(Sender: TObject);
+    procedure SpeedButton1Click(Sender: TObject);
+    procedure btnBuscaClick(Sender: TObject);
+    procedure SpeedButton2Click(Sender: TObject);
+    procedure btnAcessarClick(Sender: TObject);
+  private
+    bookmark: TBookMark;
+    procedure OpenCadEnderecos(id_ceps: integer);
+    procedure RefreshEnderecos;
+    procedure TerminateBusca(Sender: TObject);
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  frmEnderecos: TfrmEnderecos;
+
+implementation
+
+{$R *.dfm}
+
+uses DataModule.Enderecos, untEnderecosCad;
+
+procedure TfrmEnderecos.btnAcessarClick(Sender: TObject);
+begin
+    if MessageDlg('Desja excluir o endereço selecionado?', TMsgDlgType.mtConfirmation,
+                [TmsgDlgBtn.mbYes, TmsgDlgBtn.mbNo], 0) = mrYes then
+
+                begin
+                  TLoading.Show;
+                  Tloading.ExecuteThread(procedure
+                  begin
+                    Dmenderecos.Excluir(TbEnderecos.FieldByName('id_ceps').AsInteger);
+
+                  end, TerminateDelete);
+                end;
+end;
+
+procedure TfrmEnderecos.btnBuscaClick(Sender: TObject);
+begin
+  RefreshEnderecos;
+end;
+
+procedure TfrmEnderecos.FormClose(Sender: TObject; var Action: TCloseAction);
+begin
+    Action := TCloseAction.caFree;
+    FrmEnderecos := nil;
+end;
+
+procedure TfrmEnderecos.FormShow(Sender: TObject);
+begin
+  RefreshEnderecos;
+end;
+
+procedure TFrmEnderecos.OpenCadEnderecos(id_ceps: integer);
+begin
+    TNavigation.ExecuteOnClose := RefreshEnderecos;
+    TNavigation.ParamInt := id_ceps;
+    TNavigation.OpenModal(TFrmCadEndereco, FrmCadEndereco);
+end;
+
+procedure TFrmEnderecos.RefreshEnderecos;
+begin
+    TLoading.Show;
+
+    TLoading.ExecuteThread(procedure
+    begin
+        sleep(800);
+
+        // Acessar o servidor...
+        gridEnderecos.DataSource := nil;
+        DmEnderecos.ListarEnderecos(TbEnderecos, edtBusca.Text);
+    end,
+    TerminateBusca);
+
+end;
+
+
+procedure TfrmEnderecos.SpeedButton1Click(Sender: TObject);
+begin
+  OpenCadEnderecos(0);
+end;
+
+procedure TfrmEnderecos.SpeedButton2Click(Sender: TObject);
+begin
+  Editar;
+end;
+
+procedure TFrmEnderecos.TerminateBusca(Sender: TObject);
+begin
+    TLoading.Hide;
+    gridEnderecos.DataSource := dsEnderecos;
+
+
+    if Sender is TThread then
+        if Assigned(TThread(Sender).FatalException) then
+        begin
+            showmessage(Exception(TThread(sender).FatalException).Message);
+            exit;
+        end;
+
+    if bookmark <> nil then
+      try
+        gridEnderecos.DataSource.DataSet.GotoBookmark(bookmark)
+
+      except
+
+      end;
+
+
+end;
+
+
+end.

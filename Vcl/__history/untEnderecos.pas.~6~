@@ -1,0 +1,57 @@
+unit untEnderecos;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Data.DB, FireDAC.Stan.Intf,
+  FireDAC.Stan.Option, FireDAC.Stan.Param, FireDAC.Stan.Error, FireDAC.DatS,
+  FireDAC.Phys.Intf, FireDAC.DApt.Intf, FireDAC.Stan.StorageBin, Vcl.StdCtrls,
+  Vcl.Buttons, Vcl.ExtCtrls, FireDAC.Comp.DataSet, FireDAC.Comp.Client,
+  Vcl.Grids, Vcl.DBGrids;
+
+type
+  TfrmEnderecos = class(TForm)
+    DBGrid1: TDBGrid;
+    tbEnderecos: TFDMemTable;
+    pHeader: TPanel;
+    Label4: TLabel;
+    Panel1: TPanel;
+    btnAcessar: TSpeedButton;
+    Panel2: TPanel;
+    SpeedButton1: TSpeedButton;
+    Panel3: TPanel;
+    SpeedButton2: TSpeedButton;
+    pBusca: TPanel;
+    Panel7: TPanel;
+    btnBusca: TSpeedButton;
+    edtBusca: TEdit;
+    dstbEnderecos: TDataSource;
+    tbEnderecosid_ceps: TIntegerField;
+    tbEnderecoscep: TIntegerField;
+    tbEnderecoslogradouro: TStringField;
+    tbEnderecoscomplemento: TStringField;
+    tbEnderecosbairro: TStringField;
+    tbEnderecoslocalidade: TStringField;
+    tbEnderecosuf: TStringField;
+    procedure FormClose(Sender: TObject; var Action: TCloseAction);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  frmEnderecos: TfrmEnderecos;
+
+implementation
+
+{$R *.dfm}
+
+procedure TfrmEnderecos.FormClose(Sender: TObject; var Action: TCloseAction);
+begin
+    Action := TCloseAction.caFree;
+    FrmEnderecos := nil;
+end;
+
+end.
