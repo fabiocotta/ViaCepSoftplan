@@ -66,17 +66,20 @@ uses DataModule.Enderecos, untEnderecosCad;
 
 procedure TfrmEnderecos.btnAcessarClick(Sender: TObject);
 begin
-    if MessageDlg('Desja excluir o endereço selecionado?', TMsgDlgType.mtConfirmation,
+  if tbEnderecos.RecordCount = 0  then
+  exit;
+
+  if MessageDlg('Desja excluir o endereço selecionado?', TMsgDlgType.mtConfirmation,
                 [TmsgDlgBtn.mbYes, TmsgDlgBtn.mbNo], 0) = mrYes then
 
-                begin
-                  TLoading.Show;
-                  Tloading.ExecuteThread(procedure
-                  begin
-                    Dmenderecos.Excluir(TbEnderecos.FieldByName('id_ceps').AsInteger);
+    begin
+      TLoading.Show;
+      Tloading.ExecuteThread(procedure
+                              begin
+                                Dmenderecos.Excluir(TbEnderecos.FieldByName('id_ceps').AsInteger);
 
-                  end, TerminateDelete);
-                end;
+                              end, TerminateDelete);
+    end;
 end;
 
 procedure TfrmEnderecos.btnBuscaClick(Sender: TObject);

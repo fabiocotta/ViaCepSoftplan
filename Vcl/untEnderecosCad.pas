@@ -51,6 +51,7 @@ type
     procedure btnSalvarClick(Sender: TObject);
     procedure btnPesquisarClick(Sender: TObject);
     procedure ConsultarCEP(cep: string);
+    procedure edtCepExit(Sender: TObject);
   private
 
 
@@ -197,5 +198,12 @@ begin
 end;
 
 
+
+procedure TFrmCadEndereco.edtCepExit(Sender: TObject);
+begin
+  if SomenteNumero(edtCEP.Text) <> ''  then
+    ConsultarCEP(edtCEP.Text);
+
+end;
 
 end.

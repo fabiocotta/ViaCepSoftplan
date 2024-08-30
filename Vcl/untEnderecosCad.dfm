@@ -225,6 +225,7 @@ object FrmCadEndereco: TFrmCadEndereco
     Font.Style = []
     ParentFont = False
     TabOrder = 3
+    OnExit = edtCepExit
   end
   object edtComplemento: TEdit
     Left = 25
