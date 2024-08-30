@@ -44,36 +44,43 @@ object frmEnderecos: TfrmEnderecos
       item
         Expanded = False
         FieldName = 'id_ceps'
+        Title.Caption = 'C'#243'digo'
         Visible = True
       end
       item
         Expanded = False
         FieldName = 'cep'
+        Title.Caption = 'Cep'
         Visible = True
       end
       item
         Expanded = False
         FieldName = 'logradouro'
+        Title.Caption = 'Logradouro'
         Visible = True
       end
       item
         Expanded = False
         FieldName = 'complemento'
+        Title.Caption = 'Complemento'
         Visible = True
       end
       item
         Expanded = False
         FieldName = 'bairro'
+        Title.Caption = 'Bairro'
         Visible = True
       end
       item
         Expanded = False
         FieldName = 'localidade'
+        Title.Caption = 'Localidade'
         Visible = True
       end
       item
         Expanded = False
         FieldName = 'uf'
+        Title.Caption = 'Uf'
         Visible = True
       end>
   end
@@ -337,8 +344,8 @@ object frmEnderecos: TfrmEnderecos
     UpdateOptions.CheckRequired = False
     UpdateOptions.AutoCommitUpdates = True
     StoreDefs = True
-    Left = 616
-    Top = 272
+    Left = 832
+    Top = 152
     Content = {
       414442531000000030030000FF00010001FF02FF030400160000007400620045
       006E00640065007200650063006F0073000500160000007400620045006E0064
@@ -410,7 +417,7 @@ object frmEnderecos: TfrmEnderecos
   end
   object dsEnderecos: TDataSource
     DataSet = tbEnderecos
-    Left = 728
-    Top = 272
+    Left = 832
+    Top = 216
   end
 end
