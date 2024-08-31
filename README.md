@@ -30,3 +30,17 @@ C:\dev\ViaCepSoftplan\Mobile\Win32\Debug\ViaCepSoftplanMobile.exe
 
 Executar Aplicativo Web
 C:\dev\ViaCepSoftplan\Web\
+```
+
+<h2>🛠 &nbsp;Tech Stack</h2>
+<h3>💻 &nbsp;Front-end:</h3>
+
+![JavaScript](https://img.shields.io/badge/-JavaScript-333333?style=flat&logo=javascript)
+![React](https://img.shields.io/badge/-React-333333?style=flat&logo=react)
+![Delphi](https://img.shields.io/badge/-Delphi-333333?style=flat&logo=delphi)
+
+<h3>⚙️ &nbsp;Back-end e banco de dados:</h3>
+
+![Delphi](https://img.shields.io/badge/-Delphi-333333?style=flat&logo=delphi)
+![Horse](https://img.shields.io/badge/-Horse-333333?style=flat&logo=horse)
+![SqLite](https://img.shields.io/badge/-SqLite-333333?style=flat&logo=sqlite)
