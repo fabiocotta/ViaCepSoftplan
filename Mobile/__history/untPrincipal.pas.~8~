@@ -1,0 +1,39 @@
+unit untPrincipal;
+
+interface
+
+uses
+  System.SysUtils, System.Types, System.UITypes, System.Classes, System.Variants,
+  FMX.Types, FMX.Controls, FMX.Forms, FMX.Graphics, FMX.Dialogs, FMX.Objects,
+  FMX.Controls.Presentation, FMX.StdCtrls, FMX.Layouts, FMX.Edit;
+
+type
+  TfrmPrincipal = class(TForm)
+    Image1: TImage;
+    lyTop: TLayout;
+    Rectangle1: TRectangle;
+    Image2: TImage;
+    lyFooter: TLayout;
+    lyBox: TLayout;
+    lyBusca: TLayout;
+    Layout5: TLayout;
+    Rectangle3: TRectangle;
+    Image5: TImage;
+    rectBusca: TRectangle;
+    Label1: TLabel;
+    edtCEP: TEdit;
+    lblEndereco: TLabel;
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  frmPrincipal: TfrmPrincipal;
+
+implementation
+
+{$R *.fmx}
+
+end.
