@@ -26,7 +26,7 @@ Executar Aplicativo VCL
 C:\dev\ViaCepSoftplan\Vcl\Win32\Debug\ViaCepSoftplan.exe
 
 Executar Aplicativo Mobile
-C:\dev\ViaCepSoftplan\Mobile\Win32\Debug\ViaCepSoftplan.exe
+C:\dev\ViaCepSoftplan\Mobile\Win32\Debug\ViaCepSoftplanMobile.exe
 
 Executar Aplicativo Web
 C:\dev\ViaCepSoftplan\Web\
