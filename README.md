@@ -4,6 +4,8 @@
 </p>
 <p align="center">
 aplicativo para consulta e cadastro de ceps utilizando API ViaCep. 📬
+
+  <img src="https://github.com/fabiocotta/ViaCepSoftplan/blob/main/Web/vcepsoftplan/src/assets/telas.png"/>
 </p>
 
 
