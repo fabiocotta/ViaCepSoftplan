@@ -217,14 +217,19 @@ object FrmCadEndereco: TFrmCadEndereco
     Top = 80
     Width = 146
     Height = 35
+    Hint = 'somente numeros'
     AutoSize = False
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
     Font.Height = -19
     Font.Name = 'Segoe UI'
     Font.Style = []
+    MaxLength = 8
     ParentFont = False
+    ParentShowHint = False
+    ShowHint = True
     TabOrder = 3
+    TextHint = 'ex: 66020000'
     OnExit = edtCepExit
     OnKeyPress = edtCepKeyPress
   end

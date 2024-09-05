@@ -80,6 +80,14 @@ end;
 
 procedure TFrmCadEndereco.btnSalvarClick(Sender: TObject);
 begin
+
+  if edtCep.Text = '' then
+  begin
+    showmessage('Necessário entrar com um CEP válido');
+    edtCep.SetFocus;
+    exit
+  end;
+
   TLoading.Show;
 
   TLoading.ExecuteThread(procedure
@@ -209,7 +217,12 @@ end;
 
 procedure TFrmCadEndereco.edtCepKeyPress(Sender: TObject; var Key: Char);
 begin
-  Formatar(edtCep, TFormato.CEP);
+  if not (key in ['0'..'9', '.', ',',#08]) then
+
+  begin
+    key := #0;
+    Formatar(edtCep, TFormato.CEP);
+  end;
 end;
 
 end.
