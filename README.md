@@ -1,5 +1,10 @@
-# ViaCepSoftplan 
->  aplicativo para consulta e cadastro de ceps utilizando API ViaCep.
+<p align="center">
+  <img src="https://github.com/fabiocotta/ViaCepSoftplan/blob/main/Web/vcepsoftplan/src/assets/logo.png"/>
+  
+</p>
+<p align="center">
+aplicativo para consulta e cadastro de ceps utilizando API ViaCep. 📬
+</p>
 
 
 ```sh
