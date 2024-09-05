@@ -2,6 +2,7 @@
 
 
 :root{
+    --color-blue-soft: #2b2f47;
     --color-blue: #3869FF;
     --color-dark-blue: #2b56d5;
     --color-dark-gray: #43434a;
@@ -12,6 +13,13 @@
     --color-dark-green: #118E35;
     --color-red: #E15555;
     --color-dark-red: #c43c3c;
+
+    --fsize-xsm: 11px;
+    --fsize-sm: 12px;
+    --fsize-md: 14px;
+    --fsize-lg: 16px;
+    --fsize-xl: 22px;
+    --fsize-xxl: 25px;
 }
 
 * {
@@ -29,7 +37,108 @@
 
 
 .icon-sm{
-    width: 30px;
-    height: 30px;
+    width: 20px;
+    height: 20px;
 }
+
+.rounded{
+    border-radius: 5px;
+}
+
+.ml-10{
+    margin-left: 10px;
+}
+
+.ml-20{
+    margin-left: 20px;
+}
+
+.w100{
+    width: 100%;
+}
+
+input{
+    border: 1px solid var(--color-medium-gray);
+    padding: 10px;
+    font-size: var(--fsize-md);
+}
+
+select{
+    background-color: var(--color-white);
+    font-size: var(--fsize-md);
+    display: inline-block;
+    box-sizing: border-box;
+    padding: 10px;
+    border: 1px solid var(--color-medium-gray);
+
+}
+
+.btn{
+    padding: 10px;
+    font-size: var(--fsize-md);
+    cursor: pointer;
+}
+
+.btn-blue{
+    border: 1px solid var(--color-blue-soft);
+    background-color: var(--color-blue-soft);
+    color: var(--color-white);
+}
+
+.btn-blue:hover{
+
+    background-color: var(--color-dark-blue);
+
+}
+
+.btn-blue-outline{
+    border: 1px solid var(--color-blue);
+    background-color: var(--color-white);
+    color: var(--color-blue);
+}
+
+.btn-blue-outline:hover{
+    border: 1px solid var(--color-blue);
+    background-color: var(--color-blue);
+    color: var(--color-white);
+}
+
+.btn-green{
+    border: 1px solid var(--color-green);
+    background-color: var(--color-green);
+    color: var(--color-white);
+}
+
+.btn-green:hover{
+    background-color: var(--color-dark-green);    
+}
+
+.btn-red{
+    border: 1px solid var(--color-red);
+    background-color: var(--color-red);
+    color: var(--color-white);
+}
+
+.btn-red:hover{
+    background-color: var(--color-dark-red);    
+}
+
+.text-right{
+    text-align: right;
+}
+
+table{
+    width: 100%;
+    text-align: left;
+}
+
+
+td{
+    border-bottom: 1px solid var(--color-gray);
+    padding: 10px 0px;
+}
+
+
+
+
 

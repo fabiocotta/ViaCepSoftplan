@@ -11,7 +11,7 @@ root.render(<div>
   <BrowserRouter>
     <Routes>
       <Route path='/' element={<Home />} />
-      <Route path='/endereco' element={<CadEndereco />} />
+      <Route path='/endereco/:idUrl' element={<CadEndereco />} />
     </Routes>
   </BrowserRouter>
 </div>
