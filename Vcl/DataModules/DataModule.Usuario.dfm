@@ -1,4 +1,4 @@
 object DmUsuario: TDmUsuario
-  Height = 480
-  Width = 640
+  Height = 362
+  Width = 527
 end

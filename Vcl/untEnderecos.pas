@@ -69,7 +69,7 @@ begin
   if tbEnderecos.RecordCount = 0  then
   exit;
 
-  if MessageDlg('Desja excluir o endereço selecionado?', TMsgDlgType.mtConfirmation,
+  if MessageDlg('Deseja excluir o endereço selecionado?', TMsgDlgType.mtConfirmation,
                 [TmsgDlgBtn.mbYes, TmsgDlgBtn.mbNo], 0) = mrYes then
 
     begin

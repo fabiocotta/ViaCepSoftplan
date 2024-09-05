@@ -22,7 +22,7 @@ type
     sMenu: TSplitView;
     pLogo: TPanel;
     btnMenu: TSpeedButton;
-    Image1: TImage;
+    imgLogo: TImage;
     CategoryMenuButtons: TCategoryButtons;
     sSubMenu: TSplitView;
     Panel1: TPanel;
