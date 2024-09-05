@@ -18,7 +18,7 @@ type
     Image1: TImage;
     lyTop: TLayout;
     Rectangle1: TRectangle;
-    Image2: TImage;
+    imgLogo: TImage;
     lyFooter: TLayout;
     lyBox: TLayout;
     lyBusca: TLayout;
